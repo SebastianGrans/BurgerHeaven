@@ -84,7 +84,7 @@
 				</p>
 				<p>
 					<label for="payment">Recipient</label><br>
-					<select id="payment" name="rcp">
+					<select id="payment" name="rcp"">
 						<option name="cash">Cash</option>
 						<option name="eth">Ethereum</option>
 						<option name="cc">Credit card</option>
@@ -101,14 +101,21 @@
 					<input type="radio" name="gender" id="gender" value="Undefined"> Undefined<br>
 				</p>
 			</form>
-			<p>
+			<div class="test">
+				<div class="wroom" style="position: absolute; left: 2em; z-index: -1; display: inline-block; transform: scaleX(-1);">🚗</div>
 				<button type="submit"><img src="/img/burger.svg" width="20em" style="vertical-align: -0.5em;"> <b>Order burger!</b></button>
-			</p>
+			</div>
+				
+			<!-- Hacky button animation stuff... -->	
+			<!--
+			<label class="buttonhack" for="toggle-1"><img src="/img/burger.svg" width="20em" style="vertical-align: -0.27em;"> <b>Order burger!</b></label>
+			<input type="checkbox" id="toggle-1">	
+			<div class="wroom" style="position: absolute; left: 2em; z-index: -1; display: inline-block; transform: scaleX(-1);">🚗</div>	--> 
 		</section>
 	</section>
 	<footer>
 		<hr>
-		<span style="display: inline-block; transform: rotate(180deg);">&COPY; </span> Copyleft
+		<span style="display: inline-block; transform: scaleX(-1);">&COPY; </span> Copyleft
 	</footer>
 </body>
 </html>
