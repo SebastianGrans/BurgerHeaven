@@ -3,12 +3,13 @@
 <head>
 	<title>DELI-VERY</title>
 	<meta charset="utf-8"/>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
 	<main>
 		<h1>Welcome to BurgerHeaven Online</h1>
 	</main>
-	<section>
+	<section id="burger-sel">
 		<h2>Select burger</h2>
 		<p>This is where you execute burger selection</p>
 		<table>
@@ -21,41 +22,92 @@
 			</thead>
 			<tbody>
 				<tr>
-					<th><img src="/img/playdoh.jpg" width=250em></a></th>
-					<th><img src="/img/candy.png" width=250em></a></th>
-					<th><img src="/img/cartoon.jpg" width=250em></a></th>
+					<td><img src="/img/playdoh.jpg" width=250em></td>
+					<td><img src="/img/candy.png" width=250em></td>
+					<td><img src="/img/cartoon.jpg" width=250em></td>
 				</tr>
 				<tr>
 					<td>
-						<ul>
-							<li>100% Play Doh</li>
-							<li>Kid friendly burger</li>
-							<li>We <i>wouldn't</i> eat it</li>
-						</ul>
+						<section class="desc">
+							<ul>
+								<li>100% Play Doh</li>
+								<li>Kid friendly burger</li>
+								<li>We <i>wouldn't</i> eat it</li>
+								<li><span class="allergen">Gluten</span></li>
+							</ul>
+						</section>
 					</td>
 					<td>
-						<ul>
-							<li>Yummy candy!</li>
-							<li>Diabetes inducing</li>
-							<li>We <b>would</b> eat it!</li>
-						</ul>
+						<section class="desc">
+							<ul>
+								<li>Yummy candy!</li>
+								<li>Diabetes inducing</li>
+								<li>We <b>would</b> eat it!</li>
+								<li><span class="allergen">Glucose!</span></li>
+							</ul>
+						</section>
 					</td>
 					<td>
-						<ul>
-							<li>Tastes like crayon</li>
-							<li>???</li>
-							<li>We <i>wouldn't</i> eat it</li>
-						</ul>
+						<section class="desc">
+							<ul>
+								<li>Tastes like crayon</li>
+								<li>???</li>
+								<li>We <i>wouldn't</i> eat it</li>
+								<li><span class="allergen">Cellulose</span></li>
+							</ul>
+						</section>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</section>
-	<section>
+	<section id="cust-info">
 		<h2>Customer information</h2>
 		<p>This is where you provide necessary information</p>
+		<section id="contact">
+			<form>
+				<p>
+					<label for="name">Name:</label><br>
+					<input type="text" id="firstname" name="name" required="required" placeholder="First and last name">
+				</p>
+				<p>
+					<label for="email">E-mail:</label><br>
+					<input type="email" id="email" name="email" required="required" placeholder="mail@example.com">
+				</p>
+				<p>
+					<label for="street">Street:</label><br>
+					<input type="text" id="street" name="street" required="required" placeholder="Somestreet">
+				</p>
+				<p>
+					<label for="hnr">House number:</label><br>
+					<input type="number" id="hnr" name="hnr" required="required" placeholder="42">
+				</p>
+				<p>
+					<label for="payment">Recipient</label><br>
+					<select id="payment" name="rcp">
+						<option name="cash">Cash</option>
+						<option name="eth">Ethereum</option>
+						<option name="cc">Credit card</option>
+						<option name="dc">Debit card</option>
+						<option name="dd">Dine and dash</option>
+					</select>
+				</p>
+				<p>
+					<label for="gender">Gender:</label><br>
+					<input type="radio" name="gender" id="gender" value="Birdperson" checked> Birdperson<br>
+					<input type="radio" name="gender" id="gender" value="Male"> Male<br>
+					<input type="radio" name="gender" id="gender" value="Female"> Female<br>
+					<input type="radio" name="gender" id="gender" value="Offended"> Offended<br>
+					<input type="radio" name="gender" id="gender" value="Undefined"> Undefined<br>
+				</p>
+			</form>
+			<p>
+				<button type="submit"><img src="/img/burger.svg" width="20em" style="vertical-align: -0.5em;"> <b>Order burger!</b></button>
+			</p>
+		</section>
 	</section>
 	<footer>
+		<hr>
 		<span style="display: inline-block; transform: rotate(180deg);">&COPY; </span> Copyleft
 	</footer>
 </body>
