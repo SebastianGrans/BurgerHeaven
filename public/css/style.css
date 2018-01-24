@@ -1,0 +1,108 @@
+body {
+	font-family: arial, sans-serif;
+	font-size: 1.2em;
+}
+input, select { 
+	/* Why doesn't the input font size change with the rules for body? */
+	font-size: 1em; 
+}
+
+
+#burger-sel {
+	padding: 0em 0em 0em 1em;
+	margin-bottom: 1em;
+	background-color: black;
+	color: white;
+	border: dashed 0.1em white;
+}
+
+#cust-info {
+	padding: 0em 0em 0em 1em;
+	margin-bottom: 1em;
+	border: dashed 0.1em black;	
+}
+table {
+	width: 70%;
+	text-align: center;
+}
+
+.desc {
+    /*border: 2px dashed red;*/
+    text-align: left;
+}
+.allergen {
+    font-weight: bold;
+    color: red;
+}
+
+button {
+	background-color: #62b4f4;
+	border-radius: 2em;
+	border: none;
+	transform: scale(1, 1);
+	transition: all 0.1s ease-out; */
+}
+button:hover {
+	background-color: #99e6ff;
+	/*background-color: transparent;*/
+	transform: scale(1.2, 1.2);
+}
+button:active {
+	background-color: #1e85c1;
+	transform: scale(0.9, 0.9);
+}
+
+.button-div {
+	display: inline-block;
+	margin: 0em 0 0.5em 0.3em;
+}
+
+.button-div:hover .wroom {
+	animation: delivery 3.5s ease-in;
+}
+/*.wroom:hover {
+	animation: delivery 3.5s ease-in;
+}*/
+@keyframes delivery {
+  from {
+    margin-left: 0%;
+    /* left: 1em; */
+  }
+  to {
+    margin-left: 100%;
+    /* left: 100em; */
+  }
+}
+
+/* Hacky animation stuff :) */
+/* 
+input[type=checkbox] {
+   position: absolute;
+   top: -9999px;
+   left: -9999px;
+}
+.buttonhack { 
+	font-size: 0.8em;
+	display: inline-block;
+	background-color: #62b4f4;
+	border-radius: 2em;
+	border: none;
+  	padding: 0.4em 0.55em 0.4em 0.55em;
+  	cursor: pointer;
+  	transform: scale(1, 1);
+	transition: all 0.1s ease-out; 
+}
+.buttonhack:hover {
+	background-color: #99e6ff;
+	transform: scale(1.2, 1.2);
+}
+.buttonhack:active {
+	background-color: #1e85c1;
+	transform: scale(0.9, 0.9);
+}
+input[type=checkbox]:checked ~ div {
+   animation: delivery 2s ease-in;
+}
+*/
+
+
