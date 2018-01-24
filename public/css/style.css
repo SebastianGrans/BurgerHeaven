@@ -7,10 +7,28 @@ input, select {
 	font-size: 1em; 
 }
 
+header {
+	margin: 0 0.5em 0.2em 0.5em;
+	overflow: hidden;
+}
+header img {
+	position: relative;
+	filter: blur(3px);
+	width: 100%;
+	height: auto;
+	transform: scale(1.05);  /*Removes blury edges */
+}	
+header h1 {
+	position: absolute;
+
+	color: white;
+	z-index: 1;
+}
+
 
 #burger-sel {
 	padding: 0em 0em 0em 1em;
-	margin-bottom: 1em;
+	margin: 0 0.5em 1em 0.5em;
 	background-color: black;
 	color: white;
 	border: dashed 0.1em white;
@@ -18,7 +36,7 @@ input, select {
 
 #cust-info {
 	padding: 0em 0em 0em 1em;
-	margin-bottom: 1em;
+	margin: 0 0.5em 1em 0.5em;
 	border: dashed 0.1em black;	
 }
 table {
