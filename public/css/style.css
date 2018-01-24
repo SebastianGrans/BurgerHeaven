@@ -34,16 +34,37 @@ header h1 {
 	border: dashed 0.1em white;
 }
 
+.wrapper {
+	display: grid;
+	grid-gap: 1em;
+	grid-template-columns: 15em 15em 15em;
+}
+.burger {
+	text-align: center;
+}
+
+#a {
+	grid-column: 1;
+}
+#b {
+	grid-column: 2;
+}
+#c {
+	grid-column: 3;
+}
+
 #cust-info {
 	padding: 0em 0em 0em 1em;
 	margin: 0 0.5em 1em 0.5em;
 	border: dashed 0.1em black;	
 }
-table {
+
+
+/*table {
 	width: 70%;
 	text-align: center;
 }
-
+*/
 .desc {
     /*border: 2px dashed red;*/
     text-align: left;
