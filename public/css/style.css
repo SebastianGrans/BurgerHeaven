@@ -4,12 +4,29 @@ body {
 }
 input, select { 
 	/* Why doesn't the input font size change with the rules for body? */
-	font-size: 1em; 
+	font-size: inherit; 
 }
 
 header {
+	text-align: center;
 	margin: 0 0.5em 0.2em 0.5em;
 	overflow: hidden;
+	max-height: 15em;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+/* 
+	I hate CSS. Trying to center stuff is an NP-hard problem. 
+	It's 2018 and it is still an issue. What gives?
+	http://howtocenterincss.com/ 
+*/
+.h1hack {
+	position: absolute; 
+	font-size: 2em;
+	color: white;
+	z-index: 1;
+
 }
 header img {
 	position: relative;
@@ -18,16 +35,9 @@ header img {
 	height: auto;
 	transform: scale(1.05);  /*Removes blury edges */
 }	
-header h1 {
-	position: absolute;
-
-	color: white;
-	z-index: 1;
-}
-
 
 #burger-sel {
-	padding: 0em 0em 0em 1em;
+	padding: 0em 1em 0em 1em;
 	margin: 0 0.5em 1em 0.5em;
 	background-color: black;
 	color: white;
@@ -37,13 +47,19 @@ header h1 {
 .wrapper {
 	display: grid;
 	grid-gap: 1em;
-	grid-template-columns: 15em 15em 15em;
+	grid-template-columns: repeat(3, 1fr); /*15em 15em 15em;*/
+
+}
+
+.wrapper img {
+	width: 15em;
+	text-align: center;
 }
 .burger {
 	text-align: center;
 }
 
-#a {
+/*#a {
 	grid-column: 1;
 }
 #b {
@@ -51,7 +67,28 @@ header h1 {
 }
 #c {
 	grid-column: 3;
+}*/
+
+
+@media screen and (max-width: 950px) {
+	.wrapper {
+		grid-template-columns: repeat(1, 1fr);
+	}
+/*	#a {
+		grid-column: 1
+		grid-row: 1;
+		width: 100%;
+	}
+	#b {
+		grid-column: 1;
+		grid-row: 2;
+	}
+	#c {
+		grid-column: 1;
+		grid-row: 3;
+	}   */
 }
+
 
 #cust-info {
 	padding: 0em 0em 0em 1em;
@@ -67,8 +104,12 @@ header h1 {
 */
 .desc {
     /*border: 2px dashed red;*/
-    text-align: left;
+    margin-left: -40px; /* because -webkit-padding-start: 40px; */
+    display:flex;
+	justify-content:center;
+	align-items:center;
 }
+
 .allergen {
     font-weight: bold;
     color: red;
