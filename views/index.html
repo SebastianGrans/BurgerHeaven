@@ -2,117 +2,137 @@
 <html>
 <head>
 	<title>DELI-VERY</title>
-	<meta charset="utf-8"/>
-	<!-- <link rel="stylesheet" type="text/css" href="css/reset.css"> -->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset='utf-8'/>
+	<!-- <link rel='stylesheet' type='text/css' href='css/reset.css'> -->
+	<link rel='stylesheet' type='text/css' href='css/style.css'>
+
+	<script src='js/food.js'></script>
+	<script src='js/js_script.js'></script>
+
+
+	<script src='https://vuejs.org/js/vue.js'></script>
+	<script src='js/vue_script.js' defer></script>
+
+
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 </head>
 <body>
 	<header>
-		<div class="h1hack">
+		<div class='h1hack'>
 			Welcome to BurgerHeaven Online
 		</div>
-		<img src="/img/bar.jpg">
+		<img src='/img/bar.jpg'>
 	</header>
-	<section id="burger-sel">
-	
+	<section id='burger-sel'>
 		<h2>Select burger</h2>
 		<p>This is where you execute burger selection</p>
-		<div class="wrapper">
-			<div class="burger" id="a">
+		<div class='vue-wrapper'>
+			<div v-for='item in food' class="burger">
+				<h3>{{item.name}}</h3>
+				<img class='productimg' v-bind:src=item.img>
+				<div class='desc'>
+					<ul>
+						<li v-for='descitem in item.desc'>
+							{{descitem}}
+						</li>
+					</ul> 
+				</div>
+				<div class='allergen'>
+						<img v-if='!item.lactose' v-bind:src='lactoseFreeSrc'> 
+						<img v-if='!item.gluten' v-bind:src='glutenFreeSrc'>
+				</div>
+			</div>
+		</div>
+		<!-- <div class='wrapper'>
+			<div class='burger' id='a'>
 				<h3>Play Doh Burger</h3>
-				<img src="/img/playdoh.jpg">
-				<section class="desc">
+				<img src='/img/playdoh.jpg'>
+				<section class='desc'>
 					<ul>
 						<li>100% Play Doh</li>
 						<li>Kid friendly burger</li>
 						<li>We <i>wouldn't</i> eat it</li>
-						<li><span class="allergen">Gluten</span></li>
+						<li><span class='allergen'>Gluten</span></li>
 					</ul>
 				</section>
 			</div>
-			<div class="burger" id="b">
+			<div class='burger' id='b'>
 				<h3>Candy Burger</h3>
-				<img src="/img/candy.png">
-				<section class="desc">
+				<img src='/img/candy.png'>
+				<section class='desc'>
 					<ul>
 						<li>Yummy candy!</li>
 						<li>Diabetes inducing</li>
 						<li>We <b>would</b> eat it!</li>
-						<li><span class="allergen">Glucose!</span></li>
+						<li><span class='allergen'>Glucose!</span></li>
 					</ul>
 				</section>
 			</div>
-			<div class="burger" id="c">
+			<div class='burger' id='c'>
 				<h3>Cartoon Burger</h3>
-				<img src="/img/cartoon.jpg" width=250em>
-				<section class="desc">
+				<img src='/img/cartoon.jpg' width=250em>
+				<section class='desc'>
 					<ul>
 						<li>Tastes like crayon</li>
 						<li>???</li>
 						<li>We <i>wouldn't</i> eat it</li>
-						<li><span class="allergen">Cellulose</span></li>
+						<li><span class='allergen'>Cellulose</span></li>
 					</ul>
 				</section>
 			</div>
-		</div>
+		</div> -->
 	</section>
-	<section id="cust-info">
+	<section id='cust-info'>
 		<h2>Customer information</h2>
 		<p>This is where you provide necessary information</p>
-		<section id="contact">
+		<section id='contact'>
 			<form>
 				<p>
-					<label for="name">Name:</label><br>
-					<input type="text" id="firstname" name="name" required="required" placeholder="First and last name">
+					<label for='name'>Name:</label><br>
+					<input type='text' id='firstname' name='name' required='required' placeholder='First and last name'>
 				</p>
 				<p>
-					<label for="email">E-mail:</label><br>
-					<input type="email" id="email" name="email" required="required" placeholder="mail@example.com">
+					<label for='email'>E-mail:</label><br>
+					<input type='email' id='email' name='email' required='required' placeholder='mail@example.com'>
 				</p>
 				<p>
-					<label for="street">Street:</label><br>
-					<input type="text" id="street" name="street" required="required" placeholder="Somestreet">
+					<label for='street'>Street:</label><br>
+					<input type='text' id='street' name='street' required='required' placeholder='Somestreet'>
 				</p>
 				<p>
-					<label for="hnr">House number:</label><br>
-					<input type="number" id="hnr" name="hnr" required="required" placeholder="42">
+					<label for='hnr'>House number:</label><br>
+					<input type='number' id='hnr' name='hnr' required='required' placeholder='42'>
 				</p>
 				<p>
-					<label for="payment">Recipient</label><br>
-					<select id="payment" name="rcp"">
-						<option name="cash">Cash</option>
-						<option name="eth">Ethereum</option>
-						<option name="cc">Credit card</option>
-						<option name="dc">Debit card</option>
-						<option name="dd">Dine and dash</option>
+					<label for='payment'>Recipient</label><br>
+					<select id='payment' name='rcp''>
+						<option name='cash'>Cash</option>
+						<option name='eth'>Ethereum</option>
+						<option name='cc'>Credit card</option>
+						<option name='dc'>Debit card</option>
+						<option name='dd'>Dine and dash</option>
 					</select>
 				</p>
 				<p>
-					<label for="gender">Gender:</label><br>
-					<input type="radio" name="gender" id="gender" value="Birdperson" checked> Birdperson<br>
-					<input type="radio" name="gender" id="gender" value="Male"> Male<br>
-					<input type="radio" name="gender" id="gender" value="Female"> Female<br>
-					<input type="radio" name="gender" id="gender" value="Offended"> Offended<br>
-					<input type="radio" name="gender" id="gender" value="Undefined"> Undefined<br>
+					<label for='gender'>Gender:</label><br>
+					<input type='radio' name='gender' id='gender' value='Birdperson' checked> Birdperson<br>
+					<input type='radio' name='gender' id='gender' value='Male'> Male<br>
+					<input type='radio' name='gender' id='gender' value='Female'> Female<br>
+					<input type='radio' name='gender' id='gender' value='Offended'> Offended<br>
+					<input type='radio' name='gender' id='gender' value='Undefined'> Undefined<br>
 				</p>
 			</form>
 		</section>
 	</section>
-	<div class="button-div">
-		<div class="wroom" style="position: absolute; left: 2em; z-index: -1; display: inline-block; transform: scaleX(-1);">🚗</div>
-		<button type="submit"><img src="/img/burger.svg" width="20em" style="vertical-align: -0.5em;"> <b>Order burger!</b></button>
+	
+	<div class='button-div'>
+		<div class='wroom' style='position: absolute; left: 2em; z-index: -1; display: inline-block; transform: scaleX(-1);'>🚗</div>
+		<button type='submit'><img src='/img/burger.svg' width='20em' style='vertical-align: -0.5em;'> <b>Order burger!</b></button>
 	</div>
-		
-	<!-- Hacky button animation stuff... -->	
-	<!--
-	<label class="buttonhack" for="toggle-1"><img src="/img/burger.svg" width="20em" style="vertical-align: -0.27em;"> <b>Order burger!</b></label>
-	<input type="checkbox" id="toggle-1">	
-	<div class="wroom" style="position: absolute; left: 2em; z-index: -1; display: inline-block; transform: scaleX(-1);">🚗</div>	--> 
 
 	<footer>
 		<hr>
-		<span style="display: inline-block; transform: scaleX(-1);">&COPY; </span> Copyleft
+		<span style='display: inline-block; transform: scaleX(-1);'>&COPY; </span> Copyleft
 	</footer>
 </body>
 </html>
