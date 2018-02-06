@@ -1,24 +1,68 @@
 
+'use strict';
+var socket = io();
+
 var vm = new Vue({
-	el: '.vue-wrapper',
+	el: '#vue-div',
 	data: {
 		food: food,
+		burgername: [],
 		lactoseFreeSrc: '/img/lactose-free.svg',
-		glutenFreeSrc: '/img/gluten-free.svg'
+		glutenFreeSrc: '/img/gluten-free.svg',
+		order_struct: {
+			name: '',
+			email: '',
+			loc: {x: null, y: null},
+			payment: '',
+			gender: '',
+			burgers: [] 
+		},
+		order_sent: false	
 	},
 	methods: {
-		order: function() {
-			alert("Buy burger!");
-		}
+		getNOfBurgers: function() {
+			return this.order_struct.burgers.length;
+		},
+		displayOrder: function(event) {
+			var offset = {x: event.currentTarget.getBoundingClientRect().left,
+		                    y: event.currentTarget.getBoundingClientRect().top};
+		   	var x = event.clientX - 10 - offset.x;
+		 	var y = event.clientY - 10 - offset.y;
+		 	console.log("x: " + x + " y: " + y);
+		 	this.order_struct.loc.x = x;
+		 	this.order_struct.loc.y = y;
+		},
+		addOrder: function (event) {
+			if(this.order_sent || this.order_struct.burgers.length < 1) {
+				return;
+			}
+			document.getElementById('cust-info').scrollIntoView({ 
+  	 			behavior: 'smooth' 
+			});
+			this.order_sent = true;
+		  	var inputs = document.getElementsByTagName("input");
+			for (var i = 0; i < inputs.length; i++) {
+				inputs[i].disabled = true;
+			}
+			var opts = document.getElementsByTagName("option");
+			for (var i = 0; i < opts.length; i++) {
+				opts[i].disabled = true;
+  			}
+	      	socket.emit("addOrder", { orderId: 1,
+	                                details: { x: this.order_struct.loc.x,
+	                                           y: this.order_struct.loc.y },
+	                                orderItems: this.order_struct.burgers
+	                              });
+	    }
 	}
 });
 
-var vm = new Vue({
-	el: '.order-button-div',
-	data: {
-		buy: "Buy burger!",
- 	},
-	methods: {
-		order: getOrderDetails,
-	}
-});
+// var vm = new Vue({
+// 	el: '.order-button-div',
+// 	data: {
+// 		buy: "Buy burger!",
+//  	},
+// 	methods: {
+// 		order: getOrderDetails,
+// 	}
+// });

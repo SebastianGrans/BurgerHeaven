@@ -4,7 +4,7 @@
 'use strict';
 var socket = io();
 
-var vm = new Vue({
+var vmtwo = new Vue({
   el: '#dots',
   data: {
     orders: {},

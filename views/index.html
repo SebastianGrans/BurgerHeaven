@@ -8,6 +8,12 @@
 
 	<script src='js/food.js'></script>
 	<script src='js/js_script.js' defer></script>
+	<script src="/socket.io/socket.io.js" defer></script>
+  	<!-- <script src="js/deli-very.js" defer></script> -->
+
+  	<!-- <link rel="stylesheet" href="css/deli-very.css"> -->
+  	<script src="/vue/vue.js" defer></script>
+
 
 	<script src='https://vuejs.org/js/vue.js'></script>
 	<script src='js/vue_script.js' defer></script>
@@ -22,123 +28,109 @@
 		</div>
 		<img src='/img/bar.jpg'>
 	</header>
-	<section id='burger-sel'>
-		<h2>Burgers</h2>
-		<div class='vue-wrapper'>
-			<div v-for='(item, index) in food' class="burger">
-				<h3>{{item.name}}</h3>
-				<input type="radio" name="selected-burger" :id='item.foodId' :value='item.name'>
-				<label class="selected-burger" :for='item.foodId'>
-					<img class='productimg' v-bind:src=item.img>
-				</label>
-				<div class='desc'>
-					<ul>
-						<li v-for='descitem in item.desc'>
-							{{descitem}}
-						</li>
-					</ul> 
+	<div id="vue-div">
+		<section id='burger-sel'>
+			<h2>Burgers</h2>
+			<div class='vue-wrapper'>
+				<div v-for='(item, index) in food' class="burger">
+					<h3>{{item.name}}</h3>
+					<input type="checkbox" name="selected-burger" :id='item.foodId' :value='item.name' v-model="order_struct.burgers">
+					<label class="selected-burger" :for='item.foodId'>
+						<img class='productimg' v-bind:src=item.img>
+					</label>
+					<div class='desc'>
+						<ul>
+							<li v-for='descitem in item.desc'>
+								{{descitem}}
+							</li>
+						</ul> 
+					</div>
+					<div class='allergen'>
+							<img v-if='!item.lactose' v-bind:src='lactoseFreeSrc'> 
+							<img v-if='!item.gluten' v-bind:src='glutenFreeSrc'>
+					</div>
+					
 				</div>
-				<div class='allergen'>
-						<img v-if='!item.lactose' v-bind:src='lactoseFreeSrc'> 
-						<img v-if='!item.gluten' v-bind:src='glutenFreeSrc'>
-				</div>
-				
 			</div>
-		</div>
-		<!-- <div class='wrapper'>
-			<div class='burger' id='a'>
-				<h3>Play Doh Burger</h3>
-				<img src='/img/playdoh.jpg'>
-				<section class='desc'>
-					<ul>
-						<li>100% Play Doh</li>
-						<li>Kid friendly burger</li>
-						<li>We <i>wouldn't</i> eat it</li>
-						<li><span class='allergen'>Gluten</span></li>
-					</ul>
-				</section>
-			</div>
-			<div class='burger' id='b'>
-				<h3>Candy Burger</h3>
-				<img src='/img/candy.png'>
-				<section class='desc'>
-					<ul>
-						<li>Yummy candy!</li>
-						<li>Diabetes inducing</li>
-						<li>We <b>would</b> eat it!</li>
-						<li><span class='allergen'>Glucose!</span></li>
-					</ul>
-				</section>
-			</div>
-			<div class='burger' id='c'>
-				<h3>Cartoon Burger</h3>
-				<img src='/img/cartoon.jpg' width=250em>
-				<section class='desc'>
-					<ul>
-						<li>Tastes like crayon</li>
-						<li>???</li>
-						<li>We <i>wouldn't</i> eat it</li>
-						<li><span class='allergen'>Cellulose</span></li>
-					</ul>
-				</section>
-			</div>
-		</div> -->
-	</section>
-	<div class="lower-bun">
-		<img src='/img/bar.jpg'>
-	</div>
-	<section id='cust-info'>
-		<h2>Customer information</h2>
-		<p>This is where you provide necessary information</p>
-		<section id='contact'>
-			<form>
-				<p>
-					<label for='name'>Name:</label><br>
-					<input type='text' id='name' name='name' required='required' placeholder='First and last name'>
-				</p>
-				<p>
-					<label for='email'>E-mail:</label><br>
-					<input type='email' id='email' name='email' required='required' placeholder='mail@example.com'>
-				</p>
-				<p>
-					<label for='street'>Street:</label><br>
-					<input type='text' id='street' name='street' required='required' placeholder='Somestreet'>
-				</p>
-				<p>
-					<label for='hnr'>House number:</label><br>
-					<input type='number' id='hnr' name='hnr' required='required' placeholder='42'>
-				</p>
-				<p>
-					<label for='payment'>Recipient</label><br>
-					<select id='payment' name='rcp''>
-						<option name='cash'>Cash</option>
-						<option name='eth'>Ethereum</option>
-						<option name='cc'>Credit card</option>
-						<option name='dc'>Debit card</option>
-						<option name='dd'>Dine and dash</option>
-					</select>
-				</p>
-				<p>
-					<label for='gender'>Gender:</label><br>
-					<input type='radio' name='gender' value='Birdperson' checked> Birdperson<br>
-					<input type='radio' name='gender' value='Male'> Male<br>
-					<input type='radio' name='gender' value='Female'> Female<br>
-					<input type='radio' name='gender' value='Offended'> Offended<br>
-					<input type='radio' name='gender' value='Undefined'> Undefined<br>
-				</p>
-			</form>
+
 		</section>
-	</section>
+		<section id='cust-info'>
+			<div id='contact' style="grid-area: form">
+				<h2>Customer information</h2>
+				<form>
+					<p>
+						<label for='name'>Name:</label><br>
+						<input type='text' id='name' name='name' required='required' placeholder='First and last name' v-model='order_struct.name'>
+					</p>
+					<p>
+						<label for='email'>E-mail:</label><br>
+						<input type='email' id='email' name='email' required='required' placeholder='mail@example.com' v-model='order_struct.email'>
+					</p>
+	<!-- 				<p>
+						<label for='street'>Street:</label><br>
+						<input type='text' id='street' name='street' required='required' placeholder='Somestreet'>
+					</p>
+					<p>
+						<label for='hnr'>House number:</label><br>
+						<input type='number' id='hnr' name='hnr' required='required' placeholder='42'>
+					</p> -->
+					<p>
+						<label for='payment'>Payment option</label><br>
+						<select id='payment' name='payment' v-model='order_struct.payment'>
+							<option name='cash'>Cash</option>
+							<option name='eth'>Ethereum</option>
+							<option name='cc'>Credit card</option>
+							<option name='dc'>Debit card</option>
+						</select>
+					</p>
+					<p>
+						<label for='gender' >Gender:</label><br>
+						<input type='radio' name='gender' value='Birdperson' v-model='order_struct.gender' checked > Birdperson<br>
+						<input type='radio' name='gender' v-model='order_struct.gender'value='Male'> Male<br>
+						<input type='radio' name='gender' v-model='order_struct.gender'value='Female'> Female<br>
+						<input type='radio' name='gender' v-model='order_struct.gender'value='Offended'> Offended<br>
+						<input type='radio' name='gender' v-model='order_struct.gender'value='Undefined'> Undefined<br>
+					</p>
+				</form>
+			</div>
+			<div id="recipe" v-if="order_struct.burgers.length > 0 && order_sent" style="grid-area: recipe">
+				<h2><span style="display: inline; color: rgb(119, 244, 66);">✔︎</span> Order confirmation</h2>
+				<h3>Customer details</h3>
+				Name: {{order_struct.name}} <br>
+				Email: {{order_struct.email}} <br>
+				Payment: {{order_struct.payment}} <br>
+				Gender: {{order_struct.gender}} <br>
+				Burgers: {{order_struct.burgers.join(', ')}} <br>
+			</div>
+			<div id="orderError" v-if="order_struct.burgers.length < 1 && !order_sent" style="color: red; grid-area: recipe">
+				<h2></h2>
+				✘ No burgers selected.
+			</div>
+			<div class="view-box" style="grid-area: map">
+			    <div id="dots" v-on:click="displayOrder">
+			        <div 
+			          v-if="order_struct.loc.x != null && order_struct.loc.y != null "
+			          v-bind:style="{ left: order_struct.loc.x + 'px', top: order_struct.loc.y + 'px'}">
+			          T
+			        </div>
+			    </div>
+		  	</div>
+			<div class='order-button'>
+				<div class='wroom' style='position: absolute; font-size: 2.5em; z-index: 0; display: inline-block; transform: scaleX(-1);'>🚗</div>
+				<button v-on:click="addOrder" type='button'><img src='/img/burger.svg' style='height: 1.5em; vertical-align: -0.4em;'> <b>Order!</b></button>
+			</div>
+		</section>
+		
+		<!-- <div class="lower-bun"> -->
+			<!-- <div style='display: inline-block; position: absolute;'> -->
+				<!-- <span style="transform: scaleX(-1);">&COPY;</span> Copyleft -->
+			<!-- </div>  -->
+			<!-- <img src='/img/bar.jpg' id="testing" style="z-index: -1; position: relative;"> -->
+			
+			<!-- <span style='display: inline-block; position: absolute;'>Copyleft</span>  -->
+		<!-- </div> -->
+		
+	</div> <!-- end vuediv -->
 
-
-	<div class='order-button-div'>
-		<div class='wroom' style='position: absolute; font-size: 2.5em; z-index: -1; display: inline-block; transform: scaleX(-1);'>🚗</div>
-		<button v-on:click="order()" type='button'><img src='/img/burger.svg' style='height: 1.5em; vertical-align: -0.4em;'> <b>Order!</b></button>
-	</div>
-
-	<footer>
-		<hr>
-		<span style='display: inline-block; transform: scaleX(-1);'>&COPY; </span> Copyleft
-	</footer>
 </body>
 </html>

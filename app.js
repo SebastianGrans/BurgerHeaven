@@ -25,6 +25,9 @@ app.get('/', function (req, res) {
 app.get('/map', function (req, res) {
   res.sendFile(path.join(__dirname, 'views/map.html'));
 });
+app.get('/stache', function (req, res) {
+  res.sendFile(path.join(__dirname, 'views/stache.html'));
+});
 // Serve dispatcher.html as /dispatcher
 app.get('/dispatcher', function (req, res) {
   res.sendFile(path.join(__dirname, 'views/dispatcher.html'));
