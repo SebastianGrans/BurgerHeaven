@@ -13,8 +13,8 @@ var vm = new Vue({
 			name: '',
 			email: '',
 			loc: {x: null, y: null},
-			payment: '',
-			gender: '',
+			payment: 'cash',
+			gender: 'Birdperson',
 			burgers: [] 
 		},
 		order_sent: false	
@@ -48,11 +48,9 @@ var vm = new Vue({
 			for (var i = 0; i < opts.length; i++) {
 				opts[i].disabled = true;
   			}
-	      	socket.emit("addOrder", { orderId: 1,
-	                                details: { x: this.order_struct.loc.x,
-	                                           y: this.order_struct.loc.y },
-	                                orderItems: this.order_struct.burgers
-	                              });
+  			var date = new Date();
+	      	socket.emit("addOrder", this.order_struct);
+	       // socket.emit("helloworld", "hello there...");
 	    }
 	}
 });

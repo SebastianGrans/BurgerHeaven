@@ -10,15 +10,18 @@
   <script src="js/deli-very.js" defer></script>
 </head>
 <body>
-  <h1> Click in the map! </h1>
   <div class="view-box">
-    <div id="dots" v-on:click="addOrder">
-        <div 
-          v-for="(order, key) in orders"
-          v-bind:style="{ left: order.details.x + 'px', top: order.details.y + 'px'}">
-          {{key}}
-        </div>
+    <div class="orders">
+      Stuff
     </div>
+    <div id="dots" v-on:click="addOrder" >
+        <!-- <div 
+          v-for="(order, key) in orders"
+          v-bind:style="{ left: order.details.order_struct.loc.x + 'px', top: order.details.loc.y + 'px'}">
+          {{key}}
+        </div> -->
+    </div>
+    
   </div>
 </body>
 </html>

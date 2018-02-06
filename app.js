@@ -42,9 +42,20 @@ function Data() {
 /*
   Adds an order to to the queue
 */
+
 Data.prototype.addOrder = function (order) {
   //Store the order in an "associative array" with orderId as key
-  this.orders[order.orderId] = order;
+  
+
+  var lastOrder = Object.keys(this.orders).reduce(function (last, next) {
+    return Math.max(last, next);
+  }, 0);
+  var nextOrder = lastOrder + 1;
+  var order_struct = {orderId: nextOrder, 
+                details: order};
+  
+  console.log(order_struct);
+  this.orders[nextOrder] = order_struct;
 };
 
 Data.prototype.getAllOrders = function () {
@@ -64,6 +75,9 @@ io.on('connection', function (socket) {
     io.emit('currentQueue', { orders: data.getAllOrders() });
   });
 
+  socket.on('helloworld', function(data) {
+    console.log(data);
+  }.bind(this));
 });
 
 var server = http.listen(app.get('port'), function () {

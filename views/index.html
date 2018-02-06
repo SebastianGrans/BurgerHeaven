@@ -77,19 +77,19 @@
 					<p>
 						<label for='payment'>Payment option</label><br>
 						<select id='payment' name='payment' v-model='order_struct.payment'>
-							<option name='cash'>Cash</option>
-							<option name='eth'>Ethereum</option>
+							<option name='cash' value='cash'>Cash</option>
+							<option name='eth' selected>Ethereum</option>
 							<option name='cc'>Credit card</option>
 							<option name='dc'>Debit card</option>
 						</select>
 					</p>
 					<p>
 						<label for='gender' >Gender:</label><br>
-						<input type='radio' name='gender' value='Birdperson' v-model='order_struct.gender' checked > Birdperson<br>
-						<input type='radio' name='gender' v-model='order_struct.gender'value='Male'> Male<br>
-						<input type='radio' name='gender' v-model='order_struct.gender'value='Female'> Female<br>
-						<input type='radio' name='gender' v-model='order_struct.gender'value='Offended'> Offended<br>
-						<input type='radio' name='gender' v-model='order_struct.gender'value='Undefined'> Undefined<br>
+						<input type='radio' name='gender' value='Birdperson' v-model='order_struct.gender' > Birdperson<br>
+						<input type='radio' name='gender' v-model='order_struct.gender' value='Male'> Male<br>
+						<input type='radio' name='gender' v-model='order_struct.gender' value='Female'> Female<br>
+						<input type='radio' name='gender' v-model='order_struct.gender' value='Offended'> Offended<br>
+						<input type='radio' name='gender' v-model='order_struct.gender' value='Undefined'> Undefined<br>
 					</p>
 				</form>
 			</div>
