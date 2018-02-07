@@ -52,10 +52,15 @@ Data.prototype.addOrder = function (order) {
   }, 0);
   var nextOrder = lastOrder + 1;
   var order_struct = {orderId: nextOrder, 
-                details: order};
+                details: order,
+                order_sent: false};
   
   console.log(order_struct);
   this.orders[nextOrder] = order_struct;
+};
+
+Data.prototype.orderSent = function(orderId) {
+  this.orders[orderId].order_sent = true;
 };
 
 Data.prototype.getAllOrders = function () {
@@ -75,9 +80,11 @@ io.on('connection', function (socket) {
     io.emit('currentQueue', { orders: data.getAllOrders() });
   });
 
-  socket.on('helloworld', function(data) {
-    console.log(data);
-  }.bind(this));
+  socket.on('orderSent', function(orderId) {
+    console.log("Order: " + orderId + " was just sent.");
+    data.orderSent(orderId);
+    io.emit('currentQueue', { orders: data.getAllOrders() });
+  });
 });
 
 var server = http.listen(app.get('port'), function () {

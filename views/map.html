@@ -11,15 +11,25 @@
 </head>
 <body>
   <div class="view-box">
-    <div class="orders">
-      Stuff
+    <div class="orders" style="overflow: scroll;">
+      <div v-for="(order, index) in orders">
+      <div class="order" style="min-height: 15%; color: white; display: flex; align-items: center;">
+        <div class="order-text" style="display: inline-block; width: auto;">
+          <b>#{{order.orderId}} {{order.details.burgers.join(', ')}}</b><br>
+          <i>{{order.details.name}} ({{order.details.email}}, {{order.details.payment}}, {{order.details.gender}}) {{order.order_sent}} </i>
+        </div>
+        <button type='button' v-if="!order.order_sent" v-bind:id="'orderid' + order.orderId" v-on:click='sendOrder(order.orderId)'><b>Dispatch</b></button>
+        <button type='button' v-else v-bind:id="'orderid' + order.orderId + 'sent'" disabled><b>Sent!</b></button>
+      </div>
+      <hr v-if="index != getNext() - 1">
+      </div>  
     </div>
-    <div id="dots" v-on:click="addOrder" >
-        <!-- <div 
-          v-for="(order, key) in orders"
-          v-bind:style="{ left: order.details.order_struct.loc.x + 'px', top: order.details.loc.y + 'px'}">
-          {{key}}
-        </div> -->
+    <div id="dots">
+        <div 
+          v-for="order in orders"
+          v-bind:style="{ left: order.details.loc.x + 'px', top: order.details.loc.y + 'px'}">
+          {{order.orderId}}
+        </div>
     </div>
     
   </div>
