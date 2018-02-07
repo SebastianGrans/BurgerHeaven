@@ -21,6 +21,14 @@ body {
 	margin-top: 1em;
 	margin-left: 1em;
 	padding: 1em;
+	overflow: scroll;
+}
+
+.order {
+	min-height: 15%; 
+	color: white; 
+	display: flex; 
+	align-items: center;
 }
 
 .orders button {
@@ -31,7 +39,19 @@ body {
 	height: 4em;
 }
 
-.orders button[id$="sent"] {
+.orders button[id$="prep"] {
+	width: 15%;
+	background-color: orange;
+	border: none; 
+	margin-left: auto; 
+	height: 4em;
+}
+.orders button[id$="prep"]:hover {
+	background-color: darkorange;
+}
+
+
+.orders button[id$="disp"] {
 	width: 15%;
 	background-color: lime;
 	border: none; 
@@ -39,11 +59,20 @@ body {
 	height: 4em;
 }
 
-.orders dispatch:hover {
-	background-color: orange;
+.orders button[id$="disp"]:hover {
+	background-color: green;
+}
+
+.orders button[id$="resolve"] {
+	width: 15%;
+	background-color: red;
 	border: none; 
 	margin-left: auto; 
 	height: 4em;
+}
+
+.orders button[id$="resolve"]:hover {
+	background-color: orangered;
 }
 
 

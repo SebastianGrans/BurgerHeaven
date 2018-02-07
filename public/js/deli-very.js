@@ -27,18 +27,18 @@ var vm = new Vue({
 
       return lastOrder + 1;
     },
-    sendOrder: function (orderId) {
-      if(this.orders[orderId].order_sent) {
-        return;
-      }
-      console.log(this.orders[orderId].order_sent);
-      // document.getElementById("orderid"+orderId).innerHTML = "<b>Sent!<b>";
-      // document.getElementById("orderid"+orderId).disabled = true;
-      document.getElementById("orderid"+orderId).id += "sent";
-      console.log(this.orders[orderId].order_sent);
-      this.orders[orderId].order_sent = true;
-      // document.getElementById("orderid"+orderId).style.backgroundColor = "lime";
-      socket.emit("orderSent", orderId);
+    prepareOrder: function (orderId) {
+      this.orders[orderId].preparing = true;
+      socket.emit("order_preparing", orderId);
+    },
+    dispatchOrder: function (orderId) {
+      this.orders[orderId].sent = true;
+      socket.emit("order_dispatched", orderId);
+    },
+    resolveOrder: function (orderId) {
+      console.log("Would delete the order.");
+      this.orders[orderId].resolved = true;
+      socket.emit("order_resolved", orderId);
     },
   }
 });

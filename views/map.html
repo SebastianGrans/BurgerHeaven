@@ -11,22 +11,23 @@
 </head>
 <body>
   <div class="view-box">
-    <div class="orders" style="overflow: scroll;">
-      <div v-for="(order, index) in orders">
-      <div class="order" style="min-height: 15%; color: white; display: flex; align-items: center;">
+    <div class="orders">
+      <div v-for="(order, index) in orders" v-if="!order.resolved">
+      <div class="order" v-if="!order.resolved">
         <div class="order-text" style="display: inline-block; width: auto;">
           <b>#{{order.orderId}} {{order.details.burgers.join(', ')}}</b><br>
           <i>{{order.details.name}} ({{order.details.email}}, {{order.details.payment}}, {{order.details.gender}}) {{order.order_sent}} </i>
         </div>
-        <button type='button' v-if="!order.order_sent" v-bind:id="'orderid' + order.orderId" v-on:click='sendOrder(order.orderId)'><b>Dispatch</b></button>
-        <button type='button' v-else v-bind:id="'orderid' + order.orderId + 'sent'" disabled><b>Sent!</b></button>
+        <button type='button' v-if="!order.sent && !order.preparing" v-bind:id="'orderid' + order.orderId + 'prep'" v-on:click='prepareOrder(order.orderId)'><b>Begin prep</b></button>
+        <button type='button' v-if="!order.sent && order.preparing" v-bind:id="'orderid' + order.orderId + 'disp'" v-on:click='dispatchOrder(order.orderId)'><b>Dispatch</b></button>
+        <button type='button' v-if="order.sent && order.preparing" v-bind:id="'orderid' + order.orderId + 'resolve'" v-on:click='resolveOrder(order.orderId)'><b>Remove</b></button>
       </div>
       <hr v-if="index != getNext() - 1">
       </div>  
     </div>
     <div id="dots">
         <div 
-          v-for="order in orders"
+          v-for="order in orders" v-if="!order.resolved"
           v-bind:style="{ left: order.details.loc.x + 'px', top: order.details.loc.y + 'px'}">
           {{order.orderId}}
         </div>

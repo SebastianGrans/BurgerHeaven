@@ -28,7 +28,10 @@
 		</div>
 		<img src='/img/bar.jpg'>
 	</header>
+
+
 	<div id="vue-div">
+
 		<section id='burger-sel'>
 			<h2>Burgers</h2>
 			<div class='vue-wrapper'>
@@ -38,6 +41,8 @@
 					<label class="selected-burger" :for='item.foodId'>
 						<img class='productimg' v-bind:src=item.img>
 					</label>
+
+					<!-- Description of the food -->
 					<div class='desc'>
 						<ul>
 							<li v-for='descitem in item.desc'>
@@ -45,16 +50,19 @@
 							</li>
 						</ul> 
 					</div>
+
+					<!-- Allergen logos -->
 					<div class='allergen'>
 							<img v-if='!item.lactose' v-bind:src='lactoseFreeSrc'> 
 							<img v-if='!item.gluten' v-bind:src='glutenFreeSrc'>
 					</div>
-					
 				</div>
 			</div>
-
 		</section>
+
+
 		<section id='cust-info'>
+			<!-- Customer info form --> 
 			<div id='contact' style="grid-area: form">
 				<h2>Customer information</h2>
 				<form>
@@ -66,18 +74,11 @@
 						<label for='email'>E-mail:</label><br>
 						<input type='email' id='email' name='email' required='required' placeholder='mail@example.com' v-model='order_struct.email'>
 					</p>
-	<!-- 				<p>
-						<label for='street'>Street:</label><br>
-						<input type='text' id='street' name='street' required='required' placeholder='Somestreet'>
-					</p>
-					<p>
-						<label for='hnr'>House number:</label><br>
-						<input type='number' id='hnr' name='hnr' required='required' placeholder='42'>
-					</p> -->
 					<p>
 						<label for='payment'>Payment option</label><br>
 						<select id='payment' name='payment' v-model='order_struct.payment'>
-							<option name='cash' value='cash'>Cash</option>
+							<option disabled value="">Please select a payment method</option>
+							<option name='cash'>Cash</option>
 							<option name='eth' selected>Ethereum</option>
 							<option name='cc'>Credit card</option>
 							<option name='dc'>Debit card</option>
@@ -85,7 +86,7 @@
 					</p>
 					<p>
 						<label for='gender' >Gender:</label><br>
-						<input type='radio' name='gender' value='Birdperson' v-model='order_struct.gender' > Birdperson<br>
+						<input type='radio' name='gender' v-model='order_struct.gender' value='Birdperson'> Birdperson<br>
 						<input type='radio' name='gender' v-model='order_struct.gender' value='Male'> Male<br>
 						<input type='radio' name='gender' v-model='order_struct.gender' value='Female'> Female<br>
 						<input type='radio' name='gender' v-model='order_struct.gender' value='Offended'> Offended<br>
@@ -93,19 +94,27 @@
 					</p>
 				</form>
 			</div>
-			<div id="recipe" v-if="order_struct.burgers.length > 0 && order_sent" style="grid-area: recipe">
-				<h2><span style="display: inline; color: rgb(119, 244, 66);">✔︎</span> Order confirmation</h2>
-				<h3>Customer details</h3>
-				Name: {{order_struct.name}} <br>
-				Email: {{order_struct.email}} <br>
-				Payment: {{order_struct.payment}} <br>
-				Gender: {{order_struct.gender}} <br>
-				Burgers: {{order_struct.burgers.join(', ')}} <br>
+
+			<!-- Order confirmation --> 
+			<div id="order-confirmation" style="grid-area: order;">
+				<div id="order-success" style="display: none;">
+					<h2><span style="display: inline; color: rgb(119, 244, 66);">✔︎</span> Order confirmation</h2>
+					<h3>Customer details</h3>
+					Name: {{order_struct.name}} <br>
+					Email: {{order_struct.email}} <br>
+					Payment: {{order_struct.payment}} <br>
+					Gender: {{order_struct.gender}} <br>
+					Burgers: {{order_struct.burgers.join(', ')}} <br>
+				</div>
+				<div id="order-error" style="color: red; grid-area: order; display: none;">
+					<h2></h2>
+					✘ One of the input fiels were incorrectly filled in. 
+				</div>
+				<div id="order-status"  style="display: none; font-weight: bold; color: orange;">
+				</div>
 			</div>
-			<div id="orderError" v-if="order_struct.burgers.length < 1 && !order_sent" style="color: red; grid-area: recipe">
-				<h2></h2>
-				✘ No burgers selected.
-			</div>
+
+
 			<div class="view-box" style="grid-area: map">
 			    <div id="dots" v-on:click="displayOrder">
 			        <div 

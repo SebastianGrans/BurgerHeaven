@@ -45,46 +45,77 @@ function Data() {
 
 Data.prototype.addOrder = function (order) {
   //Store the order in an "associative array" with orderId as key
-  
-
   var lastOrder = Object.keys(this.orders).reduce(function (last, next) {
     return Math.max(last, next);
   }, 0);
   var nextOrder = lastOrder + 1;
   var order_struct = {orderId: nextOrder, 
                 details: order,
-                order_sent: false};
+                preparing: false,
+                sent: false,
+                resolved: false};
   
   console.log(order_struct);
   this.orders[nextOrder] = order_struct;
+  return nextOrder;
 };
 
-Data.prototype.orderSent = function(orderId) {
-  this.orders[orderId].order_sent = true;
+Data.prototype.orderDispatched = function(orderId) {
+  this.orders[orderId].sent = true;
+  
+};
+
+Data.prototype.orderPreparing= function(orderId) {
+  this.orders[orderId].preparing = true;
+};
+
+Data.prototype.orderResolve= function(orderId) {
+  this.orders[orderId].resolved = true;
 };
 
 Data.prototype.getAllOrders = function () {
   return this.orders;
 };
 
+Data.prototype.printOrder = function(orderId) {
+  console.log(this.orders[orderId]);
+}
+
 var data = new Data();
 
 io.on('connection', function (socket) {
-  // Send list of orders when a client connects
+  // This is relevant for a dispatcher view.
   socket.emit('initialize', { orders: data.getAllOrders() });
 
   // When a connected client emits an "addOrder" message
   socket.on('addOrder', function (order) {
-    data.addOrder(order);
+    var orderid = data.addOrder(order);
+    console.log("Order was recieved and given an order id. Replying with order id.");
+    // Reply to the sender with the order id.
+    socket.emit('order_recieved', orderid);
     // send updated info to all connected clients, note the use of io instead of socket
     io.emit('currentQueue', { orders: data.getAllOrders() });
   });
 
-  socket.on('orderSent', function(orderId) {
-    console.log("Order: " + orderId + " was just sent.");
-    data.orderSent(orderId);
-    io.emit('currentQueue', { orders: data.getAllOrders() });
+  // These are relevant for the clients. 
+  socket.on('order_dispatched', function(orderId) {
+    console.log("Order: " + orderId + " was just dispatched.");
+    data.orderDispatched(orderId);
+    io.emit('order_dispatched', orderId);
   });
+
+  socket.on('order_preparing', function(orderId) {
+    console.log("Order: " + orderId + " is being prepared");
+    data.orderPreparing(orderId);
+    io.emit('order_preparing', orderId);
+  });
+
+  socket.on('order_resolved', function(orderId) {
+    console.log("Order: " + orderId + " has been resolved");
+    data.orderResolve(orderId);
+    io.emit('order_resolved', orderId);
+  });
+
 });
 
 var server = http.listen(app.get('port'), function () {
