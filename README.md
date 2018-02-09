@@ -8,9 +8,16 @@
 
 
 ## Description 
-An web interface for a burger show with home delivery.<br>
+An web interface for a burger shop with home delivery.<br>
 It is equiped with both a customer front-end, as well as a restaurant front-end. <br>
 The customer interface is designed with a responsive approach to be usable on mobile devices. 
+
+## Screenshots
+### Customer interface
+![Customer interface](https://github.com/SebastianGrans/BurgerHeaven/blob/master/Screenshot-User.png)
+### Restaurant interface
+![Restaurant interface](https://github.com/SebastianGrans/BurgerHeaven/blob/master/Screenshot-Dispatch.png)
+
 
 ## Todos
 When I started writing the user front-end, it felt most natural to only allow ordering once per session. But at the last stage of the lab, you asked for implementation of multi-ordering. Due to time constraints I choose not to implement this. 
