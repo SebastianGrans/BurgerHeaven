@@ -17,6 +17,7 @@
         <div class="order-text" style="display: inline-block; width: auto;">
           <b>#{{order.orderId}} {{order.details.burgers.join(', ')}}</b><br>
           <i>{{order.details.name}} ({{order.details.email}}, {{order.details.payment}}, {{order.details.gender}}) {{order.order_sent}} </i>
+
         </div>
         <button type='button' v-if="!order.sent && !order.preparing" v-bind:id="'orderid' + order.orderId + 'prep'" v-on:click='prepareOrder(order.orderId)'><b>Begin prep</b></button>
         <button type='button' v-if="!order.sent && order.preparing" v-bind:id="'orderid' + order.orderId + 'disp'" v-on:click='dispatchOrder(order.orderId)'><b>Dispatch</b></button>
@@ -27,12 +28,28 @@
     </div>
     <div id="dots">
         <div 
-          v-for="order in orders" v-if="!order.resolved"
-          v-bind:style="{ left: order.details.loc.x + 'px', top: order.details.loc.y + 'px'}">
-          {{order.orderId}}
-        </div>
-    </div>
-    
+            v-for="order in orders" v-if="!order.resolved"> 
+          <div 
+            class="dotsdiv"
+            v-bind:id="'dot' + order.orderId"
+            v-bind:style="{ left: order.details.loc.x + 'px', top: order.details.loc.y + 'px'}"
+            v-on:click="viewDot(order)">
+              {{order.orderId}}
+            </div>
+            <div class="dotorder" 
+                v-bind:id="'dotorder' + order.orderId" 
+                v-bind:style="{ left: order.details.loc.x + 25 + 'px', top: order.details.loc.y + 25 + 'px'}" 
+                style="padding: 1em; opacity: 0; position: absolute; color: white; display: none; width: 20em; background-color: rgba(0,0,0,0.5); min-height: 3em; align-items: center;">
+              <div style="color: white;">
+                <div class="order-text" style="display: inline-block; width: auto;"> 
+                  <b>#{{order.orderId}} {{order.details.burgers.join(', ')}}</b><br>
+          <i>{{order.details.name}} ({{order.details.email}}, {{order.details.payment}}, {{order.details.gender}}) {{order.order_sent}} </i>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      
   </div>
 </body>
 </html>

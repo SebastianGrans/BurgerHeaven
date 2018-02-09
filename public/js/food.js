@@ -1,30 +1,30 @@
 var food = [
   {
   "foodId": "menuitem1",
-  "name": "Play Doh Burger",
+  "name": "Bacon Burger",
   "kCal": 850,
-  "desc": [ "100% Play Doh", "Kid friendly burger"], 
+  "desc": [ "Crispy bacon!", "Potato wedges"], 
   "lactose": true,
-  "gluten": false,    
-  "img": "/img/playdoh.jpg"
+  "gluten": true,    
+  "img": "/img/bacon.jpg"
   },
   {
   "foodId": "menuitem2",
-  "name": "CandyBurger",
+  "name": "Veggie Burger",
   "kCal": 400,
-  "desc": [ "Yummy candy!", "Diabetes inducing"], 
-  "lactose": true,
-  "gluten": true,
-  "img": "/img/candy.png"
+  "desc": [ "No animals were hurt in the making of this burger!", "Soy based patty."], 
+  "lactose": false,
+  "gluten": false,
+  "img": "/img/veggie.jpg"
   },
   {
   "foodId": "menuitem3",
-  "name": "CartoonBurger",
+  "name": "GI Burger",
   "kCal": 0,
-  "desc": [ "Tastes like crayon!", "High fiber content!"], 
+  "desc": [ "Low glycemic index!", "Sour dough bread"], 
   "lactose": false,
-  "gluten": false,
-  "img": "/img/cartoon.jpg"
+  "gluten": true,
+  "img": "/img/giburger.jpg"
   }
 ]
            

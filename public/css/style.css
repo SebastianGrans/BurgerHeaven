@@ -94,6 +94,9 @@ header img {
 
 .burger {
 	text-align: center;
+	position: relative; 
+	min-height: 60wv;
+	height: 520px;
 }
 
 .burger .productimg {
@@ -102,14 +105,7 @@ header img {
 }
 
 
-@media screen and (max-width: 680px) {
-	.wrapper {
-		grid-template-columns: repeat(1, 1fr);
-	}
-	.vue-wrapper {
-		grid-template-columns: repeat(1, 1fr);
-	}
-}
+
 
 .selected-burger {
 	display: inline-block;
@@ -135,7 +131,7 @@ header img {
 
 
 .desc {
-    margin-left: -40px; /* because -webkit-padding-start: 40px; */
+    /*margin-left: -40px;  because -webkit-padding-start: 40px; */
     display:flex;
 	justify-content:center;
 	align-items:center;
@@ -146,6 +142,7 @@ header img {
 }
 
 .allergen {
+	position: absolute;
 	bottom: 0;
     width: 100%;
 }
@@ -270,4 +267,24 @@ footer {
 	color: white;
 	margin-bottom: 2em;
 	margin-top: 2em;
+}
+
+
+@media screen and (max-width: 680px) {
+	.wrapper {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.vue-wrapper {
+		grid-template-columns: repeat(1, 1fr);
+	}
+	#cust-info {
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-areas: "form form" 
+							"order order"
+						 "map map"
+						 "btn btn";
+	}
+	.burger {
+		min-height: 135vw;
+	}
 }

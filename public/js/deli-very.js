@@ -40,5 +40,31 @@ var vm = new Vue({
       this.orders[orderId].resolved = true;
       socket.emit("order_resolved", orderId);
     },
+    viewDot: function(order) {
+      console.log("Clicked order " + order.orderId);
+      // document.getElementById("viewDotDiv").style.left = order.details.loc.x + 25 + 'px';
+      // document.getElementById("viewDotDiv").style.top = order.details.loc.y + 25 +'px';
+      var elemId = 'dotorder' + order.orderId;
+      console.log(elemId);
+      var currentState = document.getElementById(elemId).style.display;
+      var newStateDisplay = '';
+      var newStateOpacity = ''
+      if(currentState == "none") {
+        newStateDisplay = "block";
+        newStateOpacity = "1";
+        console.log("disp: " + newStateDisplay + " op: " + newStateOpacity);
+        document.getElementById(elemId).style.display = "block";
+        setTimeout(function() {
+          document.getElementById(elemId).style.opacity = "1";
+        }, 10);
+      } else {
+        document.getElementById(elemId).style.opacity = "0";
+        setTimeout(function() {
+          document.getElementById(elemId).style.display = "none";
+        }, 100);
+      }
+    },
   }
 });
+
+

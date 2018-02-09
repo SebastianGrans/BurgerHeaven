@@ -22,4 +22,5 @@ function disableInputs() {
 	for (var i = 0; i < opts.length; i++) {
 		opts[i].disabled = true;
 	}
+	// document.getElementByID("order-button").disabled = true;
 }

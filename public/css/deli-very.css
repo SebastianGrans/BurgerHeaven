@@ -33,6 +33,7 @@ body {
 
 .orders button {
 	width: 15%;
+	min-width: 15%;
 	background-color: darkorange;
 	border: none; 
 	margin-left: auto; 
@@ -41,6 +42,7 @@ body {
 
 .orders button[id$="prep"] {
 	width: 15%;
+	min-width: 15%;
 	background-color: orange;
 	border: none; 
 	margin-left: auto; 
@@ -53,6 +55,7 @@ body {
 
 .orders button[id$="disp"] {
 	width: 15%;
+	min-width: 15%;
 	background-color: lime;
 	border: none; 
 	margin-left: auto; 
@@ -87,15 +90,56 @@ body {
 	cursor: crosshair;
 }
 
-#dots div {
+#dots .dotsdiv{
 	position: absolute;
-	background: black;
+	background: darkorange;
 	color: white;
 	border-radius: 10px;
 	width:20px;
 	height:20px;
 	text-align: center;
+	cursor: pointer;
 }
+
+.dotorder {
+	transition: opacity 0.1s ease-in;
+}
+
+/*@keyframes pulse {
+  0%{transform:scale(.1);opacity: 0;}
+  50%{ opacity: .7;}
+  100%{transform: scale(1.6); opacity: 0;}
+}
+
+#test1, #test2, #test3 {
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0);
+  position: absolute;
+  margin: auto auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+
+#test1{
+  animation: pulse 2s infinite;
+  background-color: rgba(0,0,0,0);
+}
+#test2{
+  animation: pulse 2s infinite .3s;
+  background-color: rgba(0,0,0,1) !important;
+}
+#test3 {
+  animation: pulse 2s infinite .6s;
+  background-color: rgba(0,0,0,1) !important;
+}
+#test4 {
+	color: white;
+}
+*/
 
 #orderList {
 	top:1em;
